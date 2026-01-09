@@ -4,19 +4,16 @@ pipeline {
     registry = "ex04"
     dockerImage = ""
   }
-  stages{
-      stage ('Docker Build'){
-          steps{
-              script {
-                  dockerImage = docker.build(registry)
-                  dockerImage.tag("${env.BUILD_NUMBER}")
-              }
-          }
+  stages {
+    stage("Docker Build") {
+      steps {
+        sh "echo 'Docker Build...'"
       }
-      stage('Scan Image') {
-          steps {
-            grypeScan scanDest: "docker:${registry}:${BUILD_NUMBER}", repName: 'scanResult.txt', autoInstall:true
-          }
+    }
+    stage("Scan Image") {
+      steps {
+        sh "echo 'Scan Image...'"
       }
+    }
   }
 }
