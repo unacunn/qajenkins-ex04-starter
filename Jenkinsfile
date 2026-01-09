@@ -1,18 +1,19 @@
 pipeline {
   agent any
   environment {
-    registry = "ex04"
+    registry = "ex04"  // Consider using full image name like "ex04/my-image"
     dockerImage = ""
   }
-  stage ('Docker Build'){
-    steps{
+  stages {
+    stage('Docker Build') {
+      steps {
         script {
-            dockerImage = docker.build(registry)
-            dockerImage.tag("${env.BUILD_NUMBER}")
+          dockerImage = docker.build(registry)
+          dockerImage.tag("${registry}:${env.BUILD_NUMBER}")
         }
+      }
     }
-}
-    stage("Scan Image") {
+    stage('Scan Image') {
       steps {
         sh "echo 'Scan Image...'"
       }
