@@ -13,11 +13,11 @@ pipeline {
           }
       }
   }
-    stage("Scan Image") {
+    stage('Scan Image') {
       steps {
-        sh "echo 'Scan Image...'"
+        grypeScan scanDest: "docker:${registry}:${BUILD_NUMBER}", repName: 'scanResult.txt', autoInstall:true
       }
-    }
+  }
   }
   post {
     always {
