@@ -5,15 +5,15 @@ pipeline {
     dockerImage = ""
   }
   stages {
-    stage('Docker Build') {
+    stage("Docker Build") {
       steps {
-        script {
-          dockerImage = docker.build(registry)
-          dockerImage.tag("${registry}:${env.BUILD_NUMBER}")
-        }
+          script {
+                dockerImage = docker.build(registry)
+                dockerImage.tag("${env.BUILD_NUMBER}")
+          }
       }
     }
-    stage('Scan Image') {
+    stage("Scan Image") {
       steps {
         sh "echo 'Scan Image...'"
       }
